@@ -11,6 +11,7 @@
     <header>
       <h1>🤖 PR 練習 Chatbot</h1>
       <p class="subtitle">W5 Pull Request 練習</p>
+      <input id="search-input" type="text" placeholder="🔍 搜尋訊息..." oninput="searchMessages()">
     </header>
 
     <div id="chat-box">
@@ -50,6 +51,18 @@
     document.getElementById('user-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') sendMessage();
     });
+
+    function searchMessages() {
+      const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+      const messages = document.querySelectorAll('#chat-box .message');
+      messages.forEach(msg => {
+        if (keyword === '' || msg.textContent.toLowerCase().includes(keyword)) {
+          msg.classList.remove('hidden');
+        } else {
+          msg.classList.add('hidden');
+        }
+      });
+    }
   </script>
 
 </body>
